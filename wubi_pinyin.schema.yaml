@@ -1,0 +1,104 @@
+abc_segmentor:
+  extra_tags:
+    - reverse_lookup
+customization: 2047530381
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator
+key_binder:
+  bindings:
+    - {accept: bracketleft, send: Page_Up, when: paging}
+    - {accept: bracketright, send: Page_Down, when: has_menu}
+  import_preset: default
+menu:
+  page_size: 6
+punctuator:
+  half_shape:
+    "#": "#"
+    "$": ["¥", "$", "€", "£", "¢", "¤"]
+    "'": {pair: ["「", "」"]}
+    "*": "*"
+    "/": ["/", "÷"]
+    "<": ["《", "〈", "«", "<"]
+    "=": "="
+    ">": ["》", "〉", "»", ">"]
+    "@": "@"
+    "[": ["【", "["]
+    "\\": "、"
+    "]": ["】", "]"]
+    _: "──"
+    "`": "`"
+    "~": "~"
+  import_preset: symbols
+  symbols:
+    "/bq": ["😂️", "😅️", "🤪", "❤️", "👌", "😱️", "😭️", "👍️", "😍", "😘", "😇️", "😄", "🙃️", "🤔️", "☺️", "💊️", "💯️", "🙈️", "💩️", "😈️"]
+    "/dn": ["⌘", "⌥", "⇧", "⌃", "⎋", "⇪", "", "⌫", "⌦", "↩︎", "⏎", "↑", "↓", "←", "→", "↖", "↘", "⇟", "⇞"]
+    "/fh": ["©", "®", "℗", "℠", "™", "℡", "ⓘ", "♂", "♀", "☉", "☊", "☋", "☌", "☍", "☐", "☑︎", "☒", "☜", "☝", "☞", "☟", "✎", "✄", "♲", "♻", "⚐", "⚑", "⚠"]
+    "/fs": ["½", "‰", "¼", "⅓", "⅔", "¾", "⅒"]
+    "/xh": ["＊", "×", "✱", "★", "☆", "✩", "✧", "❋", "❊", "❉", "❈", "❅", "✿", "✲"]
+recognizer:
+  import_preset: default
+  patterns:
+    punct: "^/([a-z]+|[0-9]0?)$"
+    reverse_lookup: "`[a-z]*'?$"
+reverse_lookup:
+  dictionary: pinyin_simp
+  preedit_format:
+    - "xform/([nl])v/$1ü/"
+    - "xform/([nl])ue/$1üe/"
+    - "xform/([jqxy])v/$1u/"
+  prefix: "`"
+  suffix: "'"
+  tips: "〔拼音〕"
+schema:
+  author:
+    - "發明人 王永民先生"
+  dependencies:
+    - pinyin_simp
+  description: |
+    五筆字型86版＋漢語拼音混合輸入。
+    碼表源自 ibus-table
+    
+  name: "五笔·拼音"
+  schema_id: wubi_pinyin
+  version: 0.9.custom.2047530381
+speller:
+  delimiter: " ;'"
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: ["中文", "西文"]
+  - name: full_shape
+    states: ["半角", "全角"]
+  - name: extended_charset
+    states: ["常用", "增廣"]
+  - name: ascii_punct
+    states: ["。，", "．，"]
+translator:
+  dictionary: wubi86
+  disable_user_dict_for_patterns:
+    - "^z.*$"
+  enable_charset_filter: true
+  enable_encoder: true
+  enable_sentence: false
+  enable_user_dict: false
+  encode_commit_history: false
+  max_phrase_length: 4
+  prism: wubi_pinyin

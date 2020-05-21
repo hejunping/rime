@@ -1,0 +1,7 @@
+patch:
+  schema_list:
+    - schema: wubi_pinyin
+  ascii_composer:
+    good_old_caps_lock: true
+    switch_key:
+      Shift_L: commit_code
