@@ -1,7 +1,7 @@
 # Rime schema
 # encoding: utf-8
 patch:
-  "translator/enable_user_dict": false
+  "translator/enable_user_dict": true #是否开启用户词典，以记录动态字频和用户词词频
   "translator/encode_commit_history": false
   "translator/enable_sentence": false
   "menu/page_size": 6
