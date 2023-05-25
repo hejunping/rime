@@ -36,3 +36,8 @@ patch:
       "<": ["《", "〈", "«", "<"]
       ">": ["》", "〉", "»", ">"]
   recognizer/patterns/punct: "^/([a-z]+|[0-9]0?)$"
+
+  # 添加系统变量以获取时间日期等
+  'engine/translators/+':
+    - lua_translator@date_translator # 自定义系统变量输出
+
